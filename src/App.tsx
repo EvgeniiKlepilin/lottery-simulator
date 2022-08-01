@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { LotteryTicket } from "./components/LotteryTicket";
+import { WinningNumbers } from "./components/WinningNumbers";
+import { drawMegaplier, drawNumbers, drawTicketNumberLine } from "./utils/lottery-utils";
 
-function App() {
+const containerStyles: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column'
+};
+
+const App = () => {
+  const draw = drawNumbers(5);
+  const megaplier = drawMegaplier();
+
+  const ticketDraws = [
+    drawTicketNumberLine(),
+    drawTicketNumberLine(),
+    drawTicketNumberLine(),
+    drawTicketNumberLine(),
+    drawTicketNumberLine(),
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={containerStyles}>
+      <WinningNumbers draw={draw} megaplier={megaplier} />
+      <LotteryTicket draws={ticketDraws} />
     </div>
   );
-}
+};
 
 export default App;
