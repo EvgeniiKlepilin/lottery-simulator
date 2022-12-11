@@ -16,3 +16,28 @@ export const getLotteryTicketNumber = () => getRandomInt(302575350);
 export const drawTicketNumberLine = (): TicketDraw => {
   return { draw: drawNumbers(5), megaplier: drawMegaplier() };
 };
+
+export const getTicketDraw = () => [
+  drawTicketNumberLine(),
+  drawTicketNumberLine(),
+  drawTicketNumberLine(),
+  drawTicketNumberLine(),
+  drawTicketNumberLine(),
+];
+
+export const calculateWinnings = (longestCombo: number, hasMegaplier: boolean) => {
+  switch (longestCombo) {
+    case 5:
+      return hasMegaplier ? 1000000000 : 1000000;
+    case 4:
+      return hasMegaplier ? 10000 : 500;
+    case 3:
+      return hasMegaplier ? 200 : 10;
+    case 2:
+      return hasMegaplier ? 12 : 10;
+    case 1:
+      return hasMegaplier ? 4 : 2;
+    default:
+      return 0;
+  }
+};
